@@ -1,19 +1,13 @@
-import * as process from 'process';
-import * as dotenv from 'dotenv';
-
-dotenv.config({path: __dirname + '/.env'});
-
-const isRequired = (propName: string): never => {
-    throw new Error(`Config property ${propName} is required`);
-};
-
-class Config {
-    db = {
-        POSTGRES_USER: process.env.POSTGRES_USER ?? isRequired('POSTGRES_USER'),
-        POSTGRES_PASSWORD: process.env.POSTGRES_PASSWORD ?? isRequired('POSTGRES_PASSWORD'),
-        POSTGRES_DB: process.env.POSTGRES_DB ?? isRequired('POSTGRES_DB'),
-        POSTGRES_PORT: process.env.POSTGRES_PORT ?? isRequired('POSTGRES_PORT'),
-    };
-}
-
-export const config = new Config();
+export const config = () => ({
+    port: Number(process.env.PORT),
+    postgres: {
+        type: 'postgres',
+        host: process.env.DB_HOST,
+        port: 3001,
+        username: process.env.DB_USERNAME,
+        password: process.env.DB_PASSWORD,
+        //POSTGRES_PORT: parseInt(process.env.POSTGRES_PORT as string, 10) as number,
+        synchronize: true,
+        entities: ['dist/**/*.entity{.ts,.js}']
+    },
+});

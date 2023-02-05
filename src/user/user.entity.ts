@@ -3,15 +3,17 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
-    id: number;
+    id: string;
 
     @Column()
-    firstName: string;
+    login: string;
 
     @Column()
-    lastName: string;
+    password: string;
 
-    @Column({ default: true })
-    isActive: boolean;
+    toResponse(){
+        const { id, login } = this;
+        return { id ,login };
+    }
 
 }

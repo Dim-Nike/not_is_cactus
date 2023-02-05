@@ -1,15 +1,9 @@
 {
   "type": "postgres",
-  "username": "test",
-  "password": "test",
-  "database": "test",
-  "synchronize": false,
-  "entities": [
-    "src/entity/**/*.ts"
-  ],
-  "migrations": ["dist/migrations/*{.ts,.js}"],
-  "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migrations"
-  }
+  "host": "postgresql",
+  "port": 3001,
+  "username": "root",
+  "password": "postgres",
+  "synchronize": true,
+  "entities": ["dist/**/*.entity{.ts,.js}"]
 }
